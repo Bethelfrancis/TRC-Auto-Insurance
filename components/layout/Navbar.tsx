@@ -1,16 +1,29 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import QuoteModal from "@/components/ui/QuoteModal";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 10);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <>
-      <nav className="bg-white border-b border-gray-100 sticky top-0 z-50">
+      <nav
+        className={`sticky top-0 z-50 transition-all duration-300 ${
+          scrolled
+            ? "bg-white/70 backdrop-blur-lg border-b border-white/30 shadow-sm"
+            : "bg-transparent border-b border-transparent"
+        }`}
+      >
         <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
@@ -84,12 +97,11 @@ export default function Navbar() {
 
         {/* Mobile menu */}
         {menuOpen && (
-          <div className="md:hidden border-t border-gray-100 bg-white px-6 py-4 flex flex-col gap-4">
+          <div className="md:hidden border-t border-white/30 bg-white/80 backdrop-blur-lg px-6 py-4 flex flex-col gap-4">
             <Link href="#benefits" className="text-[14px] text-gray-600 font-medium" onClick={() => setMenuOpen(false)}>Benefits</Link>
             <Link href="#how-it-works" className="text-[14px] text-gray-600 font-medium" onClick={() => setMenuOpen(false)}>How it works</Link>
             <Link href="#testimonials" className="text-[14px] text-gray-600 font-medium" onClick={() => setMenuOpen(false)}>Testimonials</Link>
             <Link href="#contacts" className="text-[14px] text-gray-600 font-medium" onClick={() => setMenuOpen(false)}>Contacts</Link>
-            {/* Mobile CTA also opens modal */}
             <button
               onClick={() => { setMenuOpen(false); setModalOpen(true); }}
               className="bg-[#f97316] text-white text-[13px] font-bold px-5 py-2.5 rounded-lg text-center"
