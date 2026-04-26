@@ -1,6 +1,6 @@
 export default function CTACard() {
   return (
-    <div className="bg-[#1a56db] rounded-2xl p-8 text-white flex flex-col items-center text-center h-full justify-center">
+    <div className="w-full lg:w-[40%] bg-[#1a56db] rounded-2xl p-8 text-white flex flex-col items-center text-center h-full justify-center">
       {/* Icon */}
       <div className="w-14 h-14 rounded-full bg-white/10 flex items-center justify-center mb-5">
         <svg

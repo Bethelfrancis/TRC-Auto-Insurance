@@ -33,12 +33,12 @@ export default function FAQ() {
   };
 
   return (
-    <section className="bg-white py-16 flex-1">
+    <section className="w-full lg:w-[60%] py-16">
       <div className="h-full">
-        <p className="text-[11px] font-700 text-[#1a56db] tracking-widest uppercase mb-3">
+        <p className="text-base font-semibold text-[#1a56db] tracking-widest uppercase mb-3">
           FAQ
         </p>
-        <h2 className="text-[26px] font-800 text-gray-900 tracking-tight mb-6">
+        <h2 className="text-3xl lg:text-4xl font-800 text-gray-900 tracking-tight mb-6">
           Frequently Asked <span className="text-[#1a56db]">Questions</span>
         </h2>
 

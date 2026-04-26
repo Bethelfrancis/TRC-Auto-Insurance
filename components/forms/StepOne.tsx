@@ -154,7 +154,7 @@ export default function StepOne({
       <div className="pt-2">
         <button
           type="submit"
-          className="w-full rounded-xl bg-gradient-to-r from-[#f97316] to-[#fb923c] px-6 py-4 text-base font-bold text-white shadow-lg shadow-orange-200 transition-all duration-200 hover:from-[#ea6c0a] hover:to-[#f97316] hover:shadow-xl hover:shadow-orange-200 active:scale-[0.98]"
+          className="w-full rounded-xl bg-linear-to-r from-[#1a56db] to-[#1a56db]/30 px-6 py-4 text-base font-bold text-white shadow-sm shadow-[#1a56db] transition-all duration-200 active:scale-[0.98]"
         >
           Continue →
         </button>

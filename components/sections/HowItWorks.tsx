@@ -47,7 +47,7 @@ export default function HowItWorks() {
                   className="relative flex gap-6 mb-16 last:mb-0"
                 >
                   {/* Circular number badge */}
-                  <div className="relative z-30 w-14 h-14 rounded-full border-2 border-gray-200 bg-white flex items-center justify-center font-bold text-lg text-[#1a56db] shrink-0">
+                  <div className="relative z-20 w-14 h-14 rounded-full border-2 border-gray-200 bg-white flex items-center justify-center font-bold text-lg text-[#1a56db] shrink-0">
                     {step.num}
                   </div>
 

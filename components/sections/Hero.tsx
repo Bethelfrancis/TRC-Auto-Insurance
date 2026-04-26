@@ -2,10 +2,10 @@ import Image from "next/image";
 
 export default function Hero() {
   return (
-    <section id="quote" className="flex lg:flex-row flex-col gap-8 lg:gap-12 items-center justify-between h-screen bg-white md:pt-27 pt-22 pb-16 px-4 lg:px-10">
+    <section id="quote" className="flex lg:flex-row flex-col gap-8 lg:gap-12 items-center justify-between h-full lg:h-screen bg-white md:pt-27 pt-22 pb-16 px-4 lg:px-10">
 
           {/* Left — Copy */}
-          <div className="w-[60%] pb-2 lg:pb-0">
+          <div className="w-full lg:w-[60%] pb-2 lg:pb-0">
             {/* Badge */}
             <div className="inline-flex items-center gap-2 bg-[#1a56db]/15 text-[#1a56db] text-[11px] font-semibold px-3 py-1.5 rounded-full mb-5 border border-[#1a56db]-10">
               <span className="w-1.5 h-1.5 rounded-full bg-[#1a56db]/90 inline-block" />
@@ -64,7 +64,7 @@ export default function Hero() {
           </div>
 
           {/* Right — visual panel with image */}
-          <div className="flex w-[50%] h-100 rounded-2xl items-center justify-center overflow-hidden">
+          <div className="flex w-full lg:w-[50%] h-110 lg:h-100 rounded-2xl items-center justify-center overflow-hidden">
             <Image
               src="/images/car.jpg"
               alt="Car driving lifestyle"

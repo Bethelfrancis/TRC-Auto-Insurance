@@ -106,7 +106,7 @@ export default function StepTwo({ formData, updateFormData, nextStep, prevStep }
         <button type="button" onClick={prevStep} className="flex-none rounded-xl border-2 border-gray-200 px-6 py-4 text-sm font-bold text-[#374151] transition-all duration-200 hover:border-gray-300 hover:bg-gray-50 active:scale-[0.98]">
           ← Back
         </button>
-        <button type="submit" className="flex-1 rounded-xl bg-gradient-to-r from-[#f97316] to-[#fb923c] px-6 py-4 text-base font-bold text-white shadow-lg shadow-orange-200 transition-all duration-200 hover:from-[#ea6c0a] hover:to-[#f97316] hover:shadow-xl active:scale-[0.98]">
+        <button type="submit" className="flex-1 rounded-xl bg-gradient-to-r from-[#1a56db] to-[#1a56db]/30 px-6 py-4 text-base font-bold text-white shadow-sm shadow-[#1a56db] transition-all duration-200 active:scale-[0.98]">
           Continue →
         </button>
       </div>

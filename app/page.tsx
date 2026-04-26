@@ -17,8 +17,8 @@ export default function Home() {
       <WhyChooseUs />
       <HowItWorks />
       <Reviews />
-      <div className="bg-white">
-        <div className="max-w-6xl mx-auto px-4 lg:px-10 py-16 grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="bg-[#f5f6fa]">
+        <div className="px-4 lg:px-10 py-3 lg:py-16 flex lg:flex-row flex-col gap-15">
           <FAQ />
           <CTACard />
         </div>

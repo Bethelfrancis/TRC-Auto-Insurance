@@ -153,7 +153,7 @@ export default function StepThree({ formData, updateFormData, prevStep }: StepTh
         <button
           type="submit"
           disabled={isSubmitting}
-          className="flex-1 flex items-center justify-center rounded-xl bg-gradient-to-r from-[#f97316] to-[#fb923c] px-6 py-4 text-base font-bold text-white shadow-lg shadow-orange-200 transition-all duration-200 hover:from-[#ea6c0a] hover:to-[#f97316] hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-70 active:scale-[0.98]"
+          className="flex-1 flex items-center justify-center rounded-xl bg-gradient-to-r from-[#1a56db] to-[#1a56db]/30 px-6 py-4 text-base font-bold text-white shadow-sm shadow-[#1a56db] transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-70 active:scale-[0.98]"
         >
           {isSubmitting ? (
             <>
