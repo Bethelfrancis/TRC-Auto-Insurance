@@ -21,10 +21,10 @@ function ThankYouContent() {
         initial={{ scale: 0.5, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.45, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-        className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-green-100"
+        className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-[#1a56db]/20"
       >
         <svg
-          className="h-12 w-12 text-green-500"
+          className="h-12 w-12 text-[#1a56db]"
           fill="none"
           stroke="currentColor"
           strokeWidth={2.5}
@@ -89,14 +89,14 @@ function ThankYouContent() {
       {/* CTA */}
       <Link
         href="/"
-        className="inline-block rounded-xl bg-gradient-to-r from-[#f97316] to-[#fb923c] px-8 py-3.5 text-[15px] font-bold text-white shadow-lg shadow-orange-100 transition-all hover:from-[#ea6c0a] hover:to-[#f97316] hover:shadow-xl"
+        className="inline-block rounded-xl bg-linear-to-r from-[#1a56db] to-[#09389c] px-8 py-3.5 text-[15px] font-bold text-white shadow-lg shadow-[#1a56db]-100 transition-all duration-300 hover:from-[#3364cf] hover:to-[#1a56db] hover:shadow-xl"
       >
         Get Another Quote
       </Link>
 
       {/* Trust footer */}
-      <p className="mt-6 text-xs text-gray-400">
-        🔒 No obligation · Licensed agents only · 100% secure
+      <p className="mt-6 text-sm text-gray-400">
+        No obligation · Licensed agents only · 100% secure
       </p>
     </motion.div>
   );
@@ -104,7 +104,7 @@ function ThankYouContent() {
 
 export default function ThankYouPage() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-b from-green-50 via-white to-white px-4 py-12">
+    <div className="flex min-h-screen items-center justify-center bg-linear-to-b from-[#a3beff] via-white to-white px-4 py-12">
       <Suspense
         fallback={
           <div className="text-center text-gray-400 text-sm">Loading...</div>

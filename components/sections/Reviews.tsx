@@ -28,7 +28,7 @@ const reviews = [
 export default function Reviews() {
   return (
     <section id="testimonials" className="bg-[#f5f6fa] py-16">
-      <div className="max-w-6xl mx-auto px-6">
+      <div className="max-w-6xl mx-auto px-4 lg:px-10">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
           {/* Big rating card */}
           <div className="bg-[#1a56db] rounded-2xl p-7 text-white">
