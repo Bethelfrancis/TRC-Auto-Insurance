@@ -1,0 +1,20 @@
+create table leads (
+  id uuid default gen_random_uuid() primary key,
+  first_name text,
+  last_name text,
+  email text,
+  phone text,
+  zip_code text,
+  vehicle_year text,
+  vehicle_make text,
+  vehicle_model text,
+  date_of_birth text,
+  license_status text,
+  violations text,
+  currently_insured text,
+  trusted_form_cert_url text,
+  lead_id text,
+  ip_address text,
+  user_agent text,
+  created_at timestamptz default now()
+);

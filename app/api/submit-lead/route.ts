@@ -6,13 +6,10 @@ import {
   stepThreeSchema,
 } from "@/lib/validations";
 import { LeadData } from "@/lib/types";
+import { supabase } from "@/lib/supabase";
+import { triggerWebhook } from "@/lib/webhook";
 
 const mergedSchema = stepOneSchema.merge(stepTwoSchema).merge(stepThreeSchema);
-
-/** Simulates network + CRM processing time */
-function sleep(ms: number) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
 
 /** Random int between min and max (inclusive) */
 function randomBetween(min: number, max: number) {
@@ -40,19 +37,56 @@ export async function POST(request: NextRequest) {
       userAgent,
     };
 
-    // Simulate realistic CRM processing delay (1–1.5s)
-    await sleep(randomBetween(1000, 1500));
+    // Insert into Supabase leads table
+    const { error: dbError } = await supabase.from("leads").insert([
+      {
+        first_name: leadData.firstName,
+        last_name: leadData.lastName,
+        email: leadData.email,
+        phone: leadData.phone,
+        zip_code: leadData.zipCode,
+        vehicle_year: leadData.vehicleYear,
+        vehicle_make: leadData.vehicleMake,
+        vehicle_model: leadData.vehicleModel,
+        date_of_birth: leadData.dateOfBirth,
+        license_status: leadData.licenseStatus,
+        violations: leadData.violations,
+        currently_insured: leadData.currentlyInsured,
+        trusted_form_cert_url: leadData.trustedFormCertUrl || null,
+        lead_id: leadData.leadId || null,
+        ip_address: leadData.ipAddress,
+        user_agent: leadData.userAgent,
+      },
+    ]);
 
-    // Log the lead
-    console.log("Lead submitted:", leadData);
+    if (dbError) {
+      console.error("Database insert error:", dbError);
+      return NextResponse.json(
+        { success: false, error: "Database error" },
+        { status: 500 }
+      );
+    }
 
-    // Realistic success response — looks like a real CRM/ping-post response
+    // Log successful save
+    console.log(
+      `✅ Lead saved successfully to database: ${leadData.email} (${leadData.firstName} ${leadData.lastName})`
+    );
+
+    // Trigger webhook (non-blocking, won't crash if it fails)
+    try {
+      await triggerWebhook(leadData);
+    } catch (webhookError) {
+      console.error("Webhook trigger failed (non-fatal):", webhookError);
+    }
+
+    // Realistic success response
     return NextResponse.json({
       success: true,
       leadId: `LD-${Date.now()}-${randomBetween(1000, 9999)}`,
       timestamp: new Date().toISOString(),
       estimatedSavings: `$${randomBetween(420, 720)}`,
-      message: "Your quote request has been received. A licensed agent will be in touch shortly.",
+      message:
+        "Your quote request has been received. A licensed agent will be in touch shortly.",
     });
   } catch (error) {
     const message =
@@ -63,9 +97,6 @@ export async function POST(request: NextRequest) {
           : "Unknown error";
 
     console.error("Lead submission failed:", message);
-
-    // Realistic error delay too — real APIs don't fail instantly
-    await sleep(400);
 
     return NextResponse.json(
       { success: false, error: message },
