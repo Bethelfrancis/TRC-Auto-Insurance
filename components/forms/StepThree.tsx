@@ -4,6 +4,11 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { stepThreeSchema } from "@/lib/validations";
 import { submitLead } from "@/lib/submitLead";
+import {
+  getTrustedFormCert,
+  getLeadId,
+  debugTrackingValues,
+} from "@/lib/tracking";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -41,34 +46,81 @@ export default function StepThree({ formData, updateFormData, prevStep }: StepTh
   });
 
   const onSubmit = async (data: any) => {
-    if (isSubmitting) return; // prevent double submission
-    try {
-      setIsSubmitting(true);
-      setErrorMessage(null);
+  if (isSubmitting) return;
 
-      const trustedFormInput = document.getElementById("xxTrustedFormCertUrl") as HTMLInputElement | null;
-      const joranyaInput = document.getElementById("leadid_token") as HTMLInputElement | null;
+  try {
+    setIsSubmitting(true);
+    setErrorMessage(null);
 
-      const completeData = {
-        ...formData,
-        ...data,
-        trustedFormCertUrl: trustedFormInput?.value || undefined,
-        leadId: joranyaInput?.value || undefined,
-      };
+    const trustedFormCertUrl = getTrustedFormCert();
+    const leadId = getLeadId();
 
-      await submitLead(completeData);
+    debugTrackingValues();
 
-      // Brief delay for UX polish before redirect
-      await new Promise((resolve) => setTimeout(resolve, 800));
+    console.log("📤 Lead submission:", {
+      email: data.email,
+      trustedForm: trustedFormCertUrl ? "YES" : "NO",
+      jornaya: leadId ? "YES" : "NO",
+    });
 
-      router.push(`/thank-you?name=${encodeURIComponent(data.firstName)}`);
-    } catch (error) {
-      const message = error instanceof Error ? error.message : "Failed to submit form";
-      setErrorMessage(message);
-      console.error("Submission error:", error);
-      setIsSubmitting(false);
-    }
-  };
+    const completeData = {
+      ...formData,
+      ...data,
+      trustedFormCertUrl,
+      leadId,
+    };
+
+    await submitLead(completeData);
+
+    router.push(`/thank-you?name=${encodeURIComponent(data.firstName)}`);
+  } catch (error) {
+    setErrorMessage("Failed to submit form");
+    setIsSubmitting(false);
+  }
+};
+
+  // const onSubmit = async (data: any) => {
+  //   if (isSubmitting) return; // prevent double submission
+  //   try {
+  //     setIsSubmitting(true);
+  //     setErrorMessage(null);
+
+  //     // Extract tracking values from URL params and hidden inputs
+  //     // These are URL-based systems, not script-based
+  //     const trustedFormCertUrl = getTrustedFormCert();
+  //     const leadId = getLeadId();
+
+  //     // Debug: Show what was extracted
+  //     debugTrackingValues();
+
+  //     console.log("📤 SUBMITTING LEAD with extracted tracking data:", {
+  //       email: data.email,
+  //       firstName: data.firstName,
+  //       lastName: data.lastName,
+  //       trustedFormCertUrl: trustedFormCertUrl ? `✅ CAPTURED (${trustedFormCertUrl.slice(0, 30)}...)` : "❌ NOT CAPTURED",
+  //       leadId: leadId ? `✅ CAPTURED (${leadId.slice(0, 30)}...)` : "❌ NOT CAPTURED",
+  //     });
+
+  //     const completeData = {
+  //       ...formData,
+  //       ...data,
+  //       trustedFormCertUrl: trustedFormCertUrl || undefined,
+  //       leadId: leadId || undefined,
+  //     };
+
+  //     await submitLead(completeData);
+
+  //     // Brief delay for UX polish before redirect
+  //     await new Promise((resolve) => setTimeout(resolve, 800));
+
+  //     router.push(`/thank-you?name=${encodeURIComponent(data.firstName)}`);
+  //   } catch (error) {
+  //     const message = error instanceof Error ? error.message : "Failed to submit form";
+  //     setErrorMessage(message);
+  //     console.error("Submission error:", error);
+  //     setIsSubmitting(false);
+  //   }
+  // };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">

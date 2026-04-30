@@ -5,6 +5,8 @@ import ProgressBar from "./ProgressBar";
 import StepOne from "./StepOne";
 import StepTwo from "./StepTwo";
 import StepThree from "./StepThree";
+import TrustedForm from "@/components/tracking/TrustedForm";
+import Jornaya from "@/components/tracking/Jornaya";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRef } from "react";
 
@@ -40,6 +42,10 @@ export default function MultiStepForm() {
 
   return (
     <div className="w-full">
+      {/* Load tracking scripts */}
+      <TrustedForm />
+      <Jornaya />
+
       <ProgressBar currentStep={currentStep} totalSteps={3} />
 
       <div className="mt-6 overflow-hidden">

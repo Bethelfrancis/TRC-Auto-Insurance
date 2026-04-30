@@ -1,22 +1,16 @@
 "use client";
 
-import { useEffect } from "react";
+/**
+ * Jornaya LeadiD is URL-based tracking (not JS SDK)
+ * Only renders hidden input for compatibility
+ */
 
 export default function Jornaya() {
-  useEffect(() => {
-    // Inject Jornaya LeadiD script
-    const script = document.createElement("script");
-    script.src = "https://load.leadid.com/lead.js";
-    script.async = true;
-    document.head.appendChild(script);
-
-    return () => {
-      // Cleanup script on unmount
-      if (script.parentNode) {
-        script.parentNode.removeChild(script);
-      }
-    };
-  }, []);
-
-  return <input type="hidden" id="leadid_token" name="leadid_token" />;
+  return (
+    <input
+      type="hidden"
+      name="leadid_token"
+      id="leadid_token"
+    />
+  );
 }

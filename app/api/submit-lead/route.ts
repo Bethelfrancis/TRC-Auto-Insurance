@@ -60,9 +60,18 @@ export async function POST(request: NextRequest) {
     ]);
 
     if (dbError) {
-      console.error("Database insert error:", dbError);
+      console.error("❌ Database insert error:", {
+        message: dbError.message,
+        code: dbError.code,
+        details: dbError.details,
+        hint: dbError.hint,
+      });
       return NextResponse.json(
-        { success: false, error: "Database error" },
+        {
+          success: false,
+          error: "Database error",
+          details: dbError.message,
+        },
         { status: 500 }
       );
     }

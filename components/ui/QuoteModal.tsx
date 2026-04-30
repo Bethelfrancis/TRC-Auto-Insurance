@@ -85,9 +85,9 @@ export default function QuoteModal({ isOpen, onClose }: QuoteModalProps) {
                 </button>
               </div>
 
-              {/* Form */}
+              {/* Form — use key to force remount and reset form state when modal reopens */}
               <div className="px-6 py-5">
-                <MultiStepForm />
+                <MultiStepForm key={isOpen ? "open" : "closed"} />
               </div>
 
               {/* Footer trust */}
