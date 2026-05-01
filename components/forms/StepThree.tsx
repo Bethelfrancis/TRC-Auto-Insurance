@@ -125,7 +125,7 @@ export default function StepThree({ formData, updateFormData, prevStep }: StepTh
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
       {/* Step 3 trust header */}
-      <div className="rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-100 px-4 py-3 flex items-center gap-3">
+      <div className="rounded-xl bg-linear-to-r from-blue-50 to-indigo-50 border border-blue-100 px-4 py-3 flex items-center gap-3">
         <span className="text-xl">🔒</span>
         <div>
           <p className="text-sm font-bold text-[#1a56db]">Final step — secure your quote</p>
@@ -205,7 +205,7 @@ export default function StepThree({ formData, updateFormData, prevStep }: StepTh
         <button
           type="submit"
           disabled={isSubmitting}
-          className="flex-1 flex items-center justify-center rounded-xl bg-gradient-to-r from-[#1a56db] to-[#1a56db]/30 px-6 py-4 text-base font-bold text-white shadow-sm shadow-[#1a56db] transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-70 active:scale-[0.98]"
+          className="flex-1 flex items-center justify-center rounded-xl bg-linear-to-r from-[#1a56db] to-[#1a56db]/30 px-6 py-4 text-base font-bold text-white shadow-sm shadow-[#1a56db] transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-70 active:scale-[0.98]"
         >
           {isSubmitting ? (
             <>
@@ -213,7 +213,7 @@ export default function StepThree({ formData, updateFormData, prevStep }: StepTh
               Submitting...
             </>
           ) : (
-            "Get My Free Quote →"
+            "Get Quote"
           )}
         </button>
       </div>

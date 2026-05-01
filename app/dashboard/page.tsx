@@ -1,6 +1,7 @@
 import { supabase } from "@/lib/supabase";
 import { Lead } from "@/lib/types";
 import ExportButton from "@/components/dashboard/ExportButton";
+import ClearLeadsButton from "@/components/dashboard/ClearLeadsButton";
 import { redirect } from "next/navigation";
 
 export default async function Dashboard({
@@ -74,9 +75,12 @@ export default async function Dashboard({
       {/* Header */}
       <div className="bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex justify-between items-center">
+          <div className="flex flex-col sm:flex-row justify-between sm:items-center items-start gap-4">
             <h1 className="text-3xl font-bold text-gray-900">Leads Dashboard</h1>
-            <ExportButton leads={leads ?? []} />
+            <div className="flex gap-3">
+              <ExportButton leads={leads ?? []} />
+              <ClearLeadsButton />
+            </div>
           </div>
           <p className="text-gray-600 mt-2">
             Total leads: <span className="font-bold text-[#1a56db]">{leads?.length || 0}</span>
@@ -92,78 +96,78 @@ export default async function Dashboard({
           </div>
         ) : (
           <>
-            {/* Desktop Table */}
+            {/* Desktop Table with Horizontal Scroll */}
             <div className="hidden md:block bg-white rounded-lg shadow overflow-hidden">
               <div className="overflow-x-auto">
-                <table className="w-full">
-                  <thead className="bg-gray-100 border-b border-gray-200">
+                <table className="w-full border-collapse">
+                  <thead className="bg-gray-100 border-b border-gray-200 sticky top-0">
                     <tr>
-                      <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">
+                      <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 min-w-37.5">
                         Name
                       </th>
-                      <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">
+                      <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 min-w-45">
                         Email
                       </th>
-                      <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">
+                      <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 min-w-32.5">
                         Phone
                       </th>
-                      <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">
+                      <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 min-w-20">
                         ZIP
                       </th>
-                      <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">
+                      <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 min-w-45">
                         Vehicle
                       </th>
-                      <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">
+                      <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 min-w-25">
                         Insured
                       </th>
-                      <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">
+                      <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 min-w-30">
                         TrustedForm
                       </th>
-                      <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">
+                      <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 min-w-25">
                         LeadID
                       </th>
-                      <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700">
+                      <th className="px-6 py-3 text-left text-sm font-semibold text-gray-700 min-w-25">
                         Date
                       </th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200">
                     {(leads ?? []).map((lead: Lead) => (
-                      <tr key={lead.id} className="hover:bg-gray-50">
-                        <td className="px-6 py-4 text-sm text-gray-900">
+                      <tr key={lead.id} className="hover:bg-gray-50 border-b">
+                        <td className="px-6 py-4 text-sm text-gray-900 min-w-37.5">
                           {lead.first_name} {lead.last_name}
                         </td>
-                        <td className="px-6 py-4 text-sm text-gray-600">
+                        <td className="px-6 py-4 text-sm text-gray-600 min-w-45">
                           {lead.email}
                         </td>
-                        <td className="px-6 py-4 text-sm text-gray-600">
+                        <td className="px-6 py-4 text-sm text-gray-600 min-w-32.5">
                           {lead.phone}
                         </td>
-                        <td className="px-6 py-4 text-sm text-gray-600">
+                        <td className="px-6 py-4 text-sm text-gray-600 min-w-20">
                           {lead.zip_code}
                         </td>
-                        <td className="px-6 py-4 text-sm text-gray-600">
+                        <td className="px-6 py-4 text-sm text-gray-600 min-w-37.5">
                           {lead.vehicle_year} {lead.vehicle_make}{" "}
                           {lead.vehicle_model}
                         </td>
-                        <td className="px-6 py-4 text-sm text-gray-600 font-medium">
+                        <td className="px-6 py-4 text-sm text-gray-600 font-medium min-w-25">
                           {lead.currently_insured === "yes" ? (
                             <span className="text-green-600">✓ Yes</span>
                           ) : (
                             <span className="text-red-600">✗ No</span>
                           )}
                         </td>
-                        <td className="px-6 py-4 text-sm text-gray-600">
+                        <td className="px-6 py-4 text-sm text-gray-600 min-w-30">
                           {lead.trusted_form_cert_url ? (
                             <span className="text-green-600 font-bold">✓</span>
                           ) : (
                             <span className="text-gray-400">—</span>
                           )}
                         </td>
-                        <td className="px-6 py-4 text-sm text-gray-600">
+                        <td className="px-6 py-4 text-sm text-gray-600 min-w-25">
                           {lead.lead_id || "—"}
                         </td>
-                        <td className="px-6 py-4 text-sm text-gray-600">
+                        <td className="px-6 py-4 text-sm text-gray-600 min-w-25">
                           {new Date(lead.created_at).toLocaleDateString()}
                         </td>
                       </tr>

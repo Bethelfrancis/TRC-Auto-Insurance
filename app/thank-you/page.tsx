@@ -87,12 +87,20 @@ function ThankYouContent() {
       </div>
 
       {/* CTA */}
-      <Link
-        href="/"
-        className="inline-block rounded-xl bg-linear-to-r from-[#1a56db] to-[#09389c] px-8 py-3.5 text-[15px] font-bold text-white shadow-lg shadow-[#1a56db]-100 transition-all duration-300 hover:from-[#3364cf] hover:to-[#1a56db] hover:shadow-xl"
-      >
-        Get Another Quote
-      </Link>
+      <div className="space-y-3">
+        <Link
+          href="/"
+          className="inline-block rounded-xl bg-linear-to-r from-[#1a56db] to-[#09389c] px-8 py-3.5 text-[15px] font-bold text-white shadow-lg shadow-[#1a56db]-100 transition-all duration-300 hover:from-[#3364cf] hover:to-[#1a56db] hover:shadow-xl"
+        >
+          Get Another Quote
+        </Link>
+        <Link
+          href="/dashboard"
+          className="inline-block rounded-xl border-2 border-[#1a56db] px-8 py-3.5 text-[15px] font-bold text-[#1a56db] transition-all duration-300 hover:bg-[#1a56db] hover:text-white ml-3"
+        >
+          View Dashboard
+        </Link>
+      </div>
 
       {/* Trust footer */}
       <p className="mt-6 text-sm text-gray-400">
