@@ -2,7 +2,7 @@ import { supabase } from "@/lib/supabase";
 import { Lead } from "@/lib/types";
 import ExportButton from "@/components/dashboard/ExportButton";
 import ClearLeadsButton from "@/components/dashboard/ClearLeadsButton";
-import { redirect } from "next/navigation";
+import Link from "next/link";
 
 export default async function Dashboard({
   searchParams,
@@ -241,6 +241,16 @@ export default async function Dashboard({
             </div>
           </>
         )}
+      </div>
+
+      {/* Back to Home button */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <Link
+          href="/"
+          className="inline-block px-6 py-2.5 bg-[#1a56db] text-white rounded-lg font-medium hover:bg-blue-700 transition-colors"
+        >
+          ← Back to Home
+        </Link>
       </div>
     </div>
   );
